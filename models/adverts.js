@@ -13,4 +13,4 @@ const advertSchema = new Schema({
 
 advertSchema.plugin(toJSON);
 
-export const AdvertModel = model("User", advertSchema);
+export const AdvertModel = model("Advert", advertSchema);
