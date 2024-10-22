@@ -35,7 +35,7 @@ export const getAdverts = async (req, res, next) => {
     }
 }
 
-export const getAdvertById = async (req, res, next) => {
+export const getAdvert = async (req, res, next) => {
     try {
         // Fetch a book for database
         const advert = await AdvertModel.findById(req.params.id);
@@ -64,8 +64,8 @@ export const updateAdvert = async (req, res, next) => {
 
 export const deleteAdvert = async (req, res, next) => {
     try {
-        await AdvertModel.findByIdAndDelete(req.params.id);
-        res.status(200).json("Advert was deleted!");
+      const advert = await AdvertModel.findByIdAndDelete(req.params.id);
+        res.status(200).json(advert);
     } catch (error) {
         next(error);
     }

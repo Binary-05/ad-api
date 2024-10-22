@@ -1,5 +1,5 @@
 # Ad API
-A RESTful API for maanging adverts on an ad website.
+A RESTful API for managing adverts on an ad website.
 
 # Project Description
 The Ad API is a Node.js and Express.js project that provides a simple and intuitive way to manage adverts on an ad website. The API allows vendors to create, read, update, and delete ads. Users are only allowed to read ads.
@@ -12,6 +12,7 @@ Start the server: node app.js
 # Environment variables
 Create a .env file with the following variable:
 MONGO_URI: the URI of your MongoDB instance
+JWT_PRIVATE_KEY: the authentication key
 
 # Running the API
 Start the server: node app.js
@@ -26,7 +27,11 @@ PATCH /adverts/:id: Update a single advert by ID
 DELETE /adverts/:id: Delete a single advert by ID
 
 Users:
-
+POST /users/register: Allows a user to be registered
+POST /users/login: Allows a user to login
+GET /adverts/:id: Retrieve a single advert by ID
+PATCH /adverts/:id: Update a single advert by ID
+DELETE /adverts/:id: Delete a single advert by ID
 
 # Guidelines
 Follow the Node.js coding standards
