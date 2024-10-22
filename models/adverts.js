@@ -7,7 +7,7 @@ const advertSchema = new Schema({
     description: { type: String, required: true },
     price: { type: String, required: true },
     category: { type: String, 
-        enum: [ "electronics", "" ], 
+        enum: [ "electronics", "clothing" ], 
         required: true }
 }, {
     timestamps: true
