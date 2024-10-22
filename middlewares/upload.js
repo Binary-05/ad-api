@@ -8,5 +8,3 @@ export const advertmediaUpload = multer({
     }),
     preservePath: true
 });
-
-

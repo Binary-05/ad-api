@@ -6,7 +6,9 @@ const advertSchema = new Schema({
     media: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: String, required: true },
-    category: { type: String, required: true }
+    category: { type: String, 
+        enum: [ "electronics", "" ], 
+        required: true }
 }, {
     timestamps: true
 });
