@@ -58,7 +58,16 @@ export const updateAdvert = async (req, res, next) => {
         if (error) {
             return res.status(422).json(error);
         }
-        await AdvertModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        console.log(req.params, req.auth);
+        const advert = await AdvertModel.findOneAndUpdate(
+            {
+                _id: req.params.id,
+                user: req.auth.id
+            },
+            value, { new: true });
+        if (!advert) {
+            return res.status(404).json("Advert not found!");
+        }
         res.status(200).json("Advert updated!");
     } catch (error) {
         next(error);
@@ -67,8 +76,16 @@ export const updateAdvert = async (req, res, next) => {
 
 export const deleteAdvert = async (req, res, next) => {
     try {
-      const advert = await AdvertModel.findByIdAndDelete(req.params.id);
-        res.status(200).json(advert);
+        const advert = await AdvertModel.findOneAndDelete(
+            {
+                _id: req.params.id,
+                user: req.auth.id
+            }
+        );
+        if (!advert) {
+            return res.status(404).json("Advert not found!");
+        }
+        res.status(200).json("Advert deleted.");
     } catch (error) {
         next(error);
     }
