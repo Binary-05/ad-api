@@ -12,7 +12,10 @@ export const addAdvert = async (req, res, next) => {
             return res.status(422).json(error);
         }
         // Write advert to database
-        await AdvertModel.create(value);
+        await AdvertModel.create({
+            ...value,
+            user: req.auth.id
+        });
         // Respond to request
         res.status(201).json("Advert was added!");
     } catch (error) {

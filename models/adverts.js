@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 import { toJSON } from "@reis/mongoose-to-json";
 
 const advertSchema = new Schema({
@@ -6,9 +6,12 @@ const advertSchema = new Schema({
     media: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: String, required: true },
-    category: { type: String, 
-        enum: [ "electronics", "clothing" ], 
-        required: true }
+    category: {
+        type: String,
+        enum: ["electronics", "clothing"],
+        required: true
+    },
+    user: { type: Types.ObjectId, required: true, ref: "User"}
 }, {
     timestamps: true
 });
