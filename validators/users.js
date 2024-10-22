@@ -15,7 +15,7 @@ export const loginUserValidator = Joi.object({
 });
 
 export const updateProfileValidator = Joi.object({
-    userName: Joi.string(),
+    businessName: Joi.string(),
     firstName: Joi.string(),
     lastName: Joi.string()
 });
