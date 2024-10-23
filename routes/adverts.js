@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addAdvert, deleteAdvert, getAdvert, getAdverts, updateAdvert } from "../controllers/adverts.js";
+import { addAdvert, countAdverts, deleteAdvert, getAdvert, getAdverts, updateAdvert } from "../controllers/adverts.js";
 import { advertmediaUpload } from "../middlewares/upload.js";
 import { hasPermission, isAuthenticated } from "../middlewares/auth.js";
 
@@ -10,6 +10,8 @@ const advertRouter = Router();
 advertRouter.post("/adverts", isAuthenticated, hasPermission("add_advert"), advertmediaUpload.single("media"), addAdvert);
 
 advertRouter.get("/adverts", getAdverts);
+
+advertRouter.get("/adverts/count", countAdverts);
 
 advertRouter.get("/adverts/:id", getAdvert);
 

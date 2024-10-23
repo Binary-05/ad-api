@@ -5,10 +5,10 @@ const advertSchema = new Schema({
     title: { type: String, required: true },
     media: { type: String, required: true },
     description: { type: String, required: true },
-    price: { type: String, required: true },
+    price: { type: Number, required: true },
     category: {
         type: String,
-        enum: ["electronics", "clothing"],
+        enum: ["electronics", "clothing", "interior", "accessories", "automoblie", "kitchen", "art", "food", "construction"],
         required: true
     },
     user: { type: Types.ObjectId, required: true, ref: "User"}
