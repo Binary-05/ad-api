@@ -25,14 +25,27 @@ export const addAdvert = async (req, res, next) => {
 
 export const getAdverts = async (req, res, next) => {
     try {
-        const { filter = "{}", limit = 10, skip = 0 } = req.query;
+        const { filter = "{}", sort = "{}", limit = 15, skip = 0 } = req.query;
         // Fetch ads from database 
         const adverts = await AdvertModel
             .find(JSON.parse(filter))
+            .sort(JSON.parse(sort))
             .limit(limit)
             .skip(skip);
         // Return response
         res.status(200).json(adverts);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const countAdverts = async (req, res, next) => {
+    try {
+        const { filter = "{}" } = req.query;
+        // Count adverts in database 
+        const count = await AdvertModel.countdocuments(JSON.parse(filter));
+        // Respond to request
+        res.json({ count });
     } catch (error) {
         next(error);
     }
