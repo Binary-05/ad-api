@@ -79,11 +79,20 @@ export const getProfile = async (req, res, next) => {
   }
 }
 
-export const updateProfile = (req, res, next) => {
+export const updateProfile = async (req, res, next) => {
   try {
     // validate user input
-    const { } = updateProfileValidator.validate(req.body);
-    res.json("User profile update");
+    const {error, value } = updateProfileValidator.validate({
+      ...req.body,
+      // avatar: req.file?.filename
+    });
+    if (error) {
+      return res.status(422).json(error);
+    }
+    // update user
+    await UserModel.findByIdAndUpdate(req.auth.id, value);
+    // respond to request
+    res.json("User profile updated");
   } catch (error) {
     next(error);
   }
