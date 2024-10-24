@@ -2,6 +2,7 @@ import { registerUserValidator, loginUserValidator, updateProfileValidator } fro
 import { UserModel } from "../models/users.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { AdvertModel } from "../models/adverts.js";
 
 export const registerUser = async (req, res, next) => {
   try {
@@ -79,10 +80,29 @@ export const getProfile = async (req, res, next) => {
   }
 }
 
+export const getUserAdverts = async (req, res, next) => {
+  try {
+    const { filter = "{}", sort = "{}", limit = 15, skip = 0 } = req.query;
+    // Fetch ads from database 
+    const adverts = await AdvertModel
+      .find({
+        ...JSON.parse(filter),
+        user: req.auth.id
+      })
+      .sort(JSON.parse(sort))
+      .limit(limit)
+      .skip(skip);
+    // Return response
+    res.status(200).json(adverts);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export const updateProfile = async (req, res, next) => {
   try {
     // validate user input
-    const {error, value } = updateProfileValidator.validate({
+    const { error, value } = updateProfileValidator.validate({
       ...req.body,
       // avatar: req.file?.filename
     });
